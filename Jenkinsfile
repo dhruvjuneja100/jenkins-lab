@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        APP_NAME = 'jenkins-lab'
+        ENVIRONMENT = 'production'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -21,14 +26,28 @@ pipeline {
                 sh 'java -jar target/jenkins-lab-1.0.jar'
             }
         }
-    }
-    post {
-    success {
-        echo 'Build completed successfully!'
+
+        stage('Environment Info') {
+            steps {
+                echo "Application: ${APP_NAME}"
+                echo "Environment: ${ENVIRONMENT}"
+                echo "Build Number: ${BUILD_NUMBER}"
+                echo "Workspace: ${WORKSPACE}"
+            }
+        }
     }
 
-    failure {
-        echo 'Build failed!'
+    post {
+        success {
+            echo 'Build completed successfully!'
+        }
+
+        failure {
+            echo 'Build failed!'
+        }
+
+        always {
+            echo 'Pipeline execution completed.'
+        }
     }
-}
 }
