@@ -1,5 +1,6 @@
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello from Jenkins CI Pipeline!- I am Dhruv Junejawellcome to dindi-");
+        // Print a message to the console
+        System.out.println("Hello, World!");
     }
 }
